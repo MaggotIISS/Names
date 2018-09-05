@@ -27,7 +27,7 @@ public class SelectApp {
      */
     private Connection connect() {
         // SQLite connection string
-        String url = "jdbc:sqlite:C:/GitHub/Names/Names/src/names/names.db";
+        String url = "jdbc:sqlite:C:/sqlite/names.db";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);
@@ -41,8 +41,8 @@ public class SelectApp {
     /**
      * select all rows in the warehouses table
      */
-    public void selectAll(){
-        String sql = "SELECT id, name, capacity FROM names";
+    public void selectAll(String tablename){
+        String sql = "SELECT * FROM " + tablename;
         
         try (Connection conn = this.connect();
              Statement stmt  = conn.createStatement();
@@ -50,9 +50,7 @@ public class SelectApp {
             
             // loop through the result set
             while (rs.next()) {
-                System.out.println(rs.getInt("id") +  "\t" + 
-                                   rs.getString("name") + "\t" +
-                                   rs.getDouble("capacity"));
+                System.out.println(rs.getString("name"));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -65,7 +63,7 @@ public class SelectApp {
      */
     public static void main(String[] args) {
         SelectApp app = new SelectApp();
-        app.selectAll();
+        app.selectAll("humaniti_female_first");
     }
  
 }

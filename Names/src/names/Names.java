@@ -33,23 +33,23 @@ public class Names {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        JTextArea jta;
-        jta = new JTextArea();
-        jta.setText("");
-        for (int j = 0; j < paths.length; j++) {
-            System.out.println("exists = " + new File(paths[j]).exists());
-            String[] lines = getLinesFromFile(new File(paths[j]));
-            jta.setText("\t//"+names[j]+CRLF);
-            jta.append("BEGIN DEFERRED;" + CRLF);
-            for (int i = 0; i < lines.length; i++) {
-                jta.append("INSERT INTO " + names[j] + " VALUES('" + lines[i] + "');" + CRLF);
-            }
-            jta.append("END;" + CRLF + CRLF);
-            System.out.println(jta.getText());
-            saveIt(jta, j);
-        }
-    }
+//    public static void main(String[] args) {
+//        JTextArea jta;
+//        jta = new JTextArea();
+//        jta.setText("");
+//        for (int j = 0; j < paths.length; j++) {
+//            System.out.println("exists = " + new File(paths[j]).exists());
+//            String[] lines = getLinesFromFile(new File(paths[j]));
+//            jta.setText("\t//"+names[j]+CRLF);
+//            jta.append("BEGIN DEFERRED;" + CRLF);
+//            for (int i = 0; i < lines.length; i++) {
+//                jta.append("INSERT INTO " + names[j] + " VALUES('" + lines[i] + "');" + CRLF);
+//            }
+//            jta.append("END;" + CRLF + CRLF);
+//            System.out.println(jta.getText());
+////            saveIt(jta, j);
+//        }
+//    }
 
     /**
      * @param f file to search

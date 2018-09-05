@@ -23,13 +23,10 @@ public class SQLiteJDBCDriverConnection {
         Connection conn = null;
         try {
             // db parameters
-            url = "jdbc:sqlite:C:/GitHub/Names/Names/src/names/names.db";
+            url = "jdbc:sqlite:C:/sqlite/names.db";
             // create a connection to the database
             conn = DriverManager.getConnection(url);
-
             System.out.println("Connection to SQLite has been established.");
-
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
