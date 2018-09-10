@@ -14,15 +14,16 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
- 
+
 /**
  *
  * @author sqlitetutorial.net
  */
 public class SelectApp {
- 
+
     /**
      * Connect to the test.db database
+     *
      * @return the Connection object
      */
     private Connection connect() {
@@ -36,18 +37,15 @@ public class SelectApp {
         }
         return conn;
     }
- 
-    
+
     /**
-     * select all rows in the warehouses table
+     * select all rows in the table
      */
-    public void selectAll(String tablename){
+    public void selectAll(String tablename) {
         String sql = "SELECT * FROM " + tablename;
-        
         try (Connection conn = this.connect();
-             Statement stmt  = conn.createStatement();
-             ResultSet rs    = stmt.executeQuery(sql)){
-            
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(sql)) {
             // loop through the result set
             while (rs.next()) {
                 System.out.println(rs.getString("name"));
@@ -56,14 +54,30 @@ public class SelectApp {
             System.out.println(e.getMessage());
         }
     }
-    
-   
+
+    public void selectSome(String tablename, int num) {
+        String sql = "SELECT * FROM " + tablename;
+        int count = 0;
+        try (Connection conn = this.connect();
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(sql)) {
+            // loop through the result set
+            while (rs.next() && count<num) {
+                System.out.println(rs.getString("name"));
+                count+=1;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        int num = 10;
         SelectApp app = new SelectApp();
-        app.selectAll("humaniti_female_first");
+        //app.selectAll("humaniti_male_first");
+        app.selectSome("humaniti_female_first", num);
     }
- 
 }
