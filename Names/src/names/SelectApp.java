@@ -64,7 +64,7 @@ public class SelectApp {
             // loop through the result set
             rs.next();
             while (count < num) {
-                if (count == (num-1)) {
+                if (count == (num - 1)) {
                     System.out.println(rs.getString("name"));
                 }
                 count += 1;
@@ -75,13 +75,56 @@ public class SelectApp {
         }
     }
 
+    public String randomOne(String tablename) {
+        String sql = "SELECT * FROM " + tablename + " ORDER BY RANDOM() LIMIT 1";
+        int count = 0;
+        try (Connection conn = this.connect();
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(sql)) {
+            //System.out.println(rs.getString("name"));
+            return (rs.getString("name"));
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        int num = 1;
+        int num = 3;
         SelectApp app = new SelectApp();
-        //app.selectAll("humaniti_male_first");
-        app.selectOne("humaniti_female_first", num);
+//        app.selectAll("humaniti_male_first");
+//        app.selectOne("humaniti_female_first", num);
+//        app.randomOne("humaniti_female_first");
+        System.out.println(app.getCouple("humaniti"));
+    }
+
+    private String getCouple(String race) {
+        String first = race + "_male_first";
+        String second = race + "_female_first";
+        String third = race + "_last";
+        String[] tables = {first, second, third};
+
+        String manfirst = "";
+        String femfirst = "";
+        String surname = "";
+        String[] names = {manfirst, femfirst, surname};
+
+        for (int i = 0; i < 3; i++) {
+            String tablename = tables[i];
+            String sql = "SELECT * FROM " + tablename + " ORDER BY RANDOM() LIMIT 1";
+            names[i] = randomOne(tables[i]);
+            try (Connection conn = this.connect();
+                    Statement stmt = conn.createStatement();
+                    ResultSet rs = stmt.executeQuery(sql)) {
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        String Couple = names[0] + " & " + names[1] + " " + names[2];
+        return Couple;
     }
 }
