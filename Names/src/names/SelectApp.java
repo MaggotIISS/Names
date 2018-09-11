@@ -55,16 +55,20 @@ public class SelectApp {
         }
     }
 
-    public void selectSome(String tablename, int num) {
+    public void selectOne(String tablename, int num) {
         String sql = "SELECT * FROM " + tablename;
         int count = 0;
         try (Connection conn = this.connect();
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql)) {
             // loop through the result set
-            while (rs.next() && count<num) {
-                System.out.println(rs.getString("name"));
-                count+=1;
+            rs.next();
+            while (count < num) {
+                if (count == (num-1)) {
+                    System.out.println(rs.getString("name"));
+                }
+                count += 1;
+                rs.next();
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -75,9 +79,9 @@ public class SelectApp {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        int num = 10;
+        int num = 1;
         SelectApp app = new SelectApp();
         //app.selectAll("humaniti_male_first");
-        app.selectSome("humaniti_female_first", num);
+        app.selectOne("humaniti_female_first", num);
     }
 }
