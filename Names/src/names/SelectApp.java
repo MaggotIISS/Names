@@ -28,6 +28,7 @@ import java.util.logging.Logger;
  * @author sqlitetutorial.net
  */
 public class SelectApp {
+
     //path to this folder on hd, but can be changed (public)
     public static String path = "C:/GitHub/Names/Names/src/names/";
     private static String CRLF = "\n";
@@ -38,6 +39,7 @@ public class SelectApp {
     public static void main(String[] args) throws FileNotFoundException {
         SelectApp app = new SelectApp();
         String line = app.getCouple("humaniti");
+        System.out.println(line);
 //        savePage(line);
 //        int num = 3;
 //        app.selectOne("humaniti_female_first", num);
@@ -48,7 +50,7 @@ public class SelectApp {
     private static void savePage(String name) throws FileNotFoundException {
         try {
             System.out.println(name);
-            String page = replaceHTML("test.html",name, name+".html");
+            String page = replaceHTML("test.html", name, name + ".html");
             System.out.println(page);
         } catch (IOException ex) {
             Logger.getLogger(SelectApp.class.getName()).log(Level.SEVERE, null, ex);
@@ -59,7 +61,7 @@ public class SelectApp {
         BufferedReader br = new BufferedReader(new FileReader(path + fname));
         String line = "";
         String page = "";
-        while((line = br.readLine()) != null ) {
+        while ((line = br.readLine()) != null) {
             line = line.replace("REPLACE", insert);
             page += line + CRLF;
         }
@@ -116,8 +118,8 @@ public class SelectApp {
      */
     private Connection connect() {
         // SQLite connection string
-        String url = "jdbc:sqlite:C:/sqlite/names.db";
-        url = "jdbc:sqlite:C:/GitHub/Names/Names/src/names/names.db";
+        String url = "jdbc:sqlite:C:/GitHub/Names/Names/src/names/names.db";
+        //url = "jdbc:sqlite:/home/leam/lang/git/others/Names/Names/src/names/names.db";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);
