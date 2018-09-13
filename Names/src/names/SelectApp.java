@@ -117,6 +117,7 @@ public class SelectApp {
     private Connection connect() {
         // SQLite connection string
         String url = "jdbc:sqlite:C:/sqlite/names.db";
+        url = "jdbc:sqlite:C:/GitHub/Names/Names/src/names/names.db";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);
