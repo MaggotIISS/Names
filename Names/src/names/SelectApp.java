@@ -47,31 +47,6 @@ public class SelectApp {
 //        app.randomOne("humaniti_female_first");
     }
 
-    private static void savePage(String name) throws FileNotFoundException {
-        try {
-            //System.out.println(name);
-            String page = replaceHTML("test.html", name, name + ".html");
-            System.out.println(page);
-        } catch (IOException ex) {
-            Logger.getLogger(SelectApp.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private static String replaceHTML(String fname, String insert, String output) throws FileNotFoundException, IOException {
-        BufferedReader br = new BufferedReader(new FileReader(path + fname));
-        String line = "";
-        String page = "";
-        while ((line = br.readLine()) != null) {
-            line = line.replace("REPLACE", insert);
-            page += line + CRLF;
-        }
-        br.close();
-        FileWriter fw = new FileWriter(path + output);
-        fw.write(page);
-        fw.close();
-        return page;
-    }
-
     private String getCouple(String race) {
         String first = race + "_male_first";
         String second = race + "_female_first";
@@ -109,6 +84,31 @@ public class SelectApp {
             System.out.println(e.getMessage());
         }
         return null;
+    }
+
+    private static void savePage(String name) throws FileNotFoundException {
+        try {
+            //System.out.println(name);
+            String page = replaceHTML("test.html", name, name + ".html");
+            System.out.println(page);
+        } catch (IOException ex) {
+            Logger.getLogger(SelectApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private static String replaceHTML(String fname, String insert, String output) throws FileNotFoundException, IOException {
+        BufferedReader br = new BufferedReader(new FileReader(path + fname));
+        String line = "";
+        String page = "";
+        while ((line = br.readLine()) != null) {
+            line = line.replace("REPLACE", insert);
+            page += line + CRLF;
+        }
+        br.close();
+        FileWriter fw = new FileWriter(path + output);
+        fw.write(page);
+        fw.close();
+        return page;
     }
 
     /**
