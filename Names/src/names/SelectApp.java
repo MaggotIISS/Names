@@ -49,7 +49,7 @@ public class SelectApp {
 
     private static void savePage(String name) throws FileNotFoundException {
         try {
-            System.out.println(name);
+            //System.out.println(name);
             String page = replaceHTML("test.html", name, name + ".html");
             System.out.println(page);
         } catch (IOException ex) {
