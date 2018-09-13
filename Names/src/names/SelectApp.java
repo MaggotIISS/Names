@@ -38,7 +38,7 @@ public class SelectApp {
     public static void main(String[] args) throws FileNotFoundException {
         SelectApp app = new SelectApp();
         String line = app.getCouple("humaniti");
-        savePage(line);
+//        savePage(line);
 //        int num = 3;
 //        app.selectOne("humaniti_female_first", num);
 //        app.selectAll("humaniti_male_first");
